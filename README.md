@@ -1,0 +1,1 @@
+First CLI project for Flatiron's Software Engineering Bootcamp. This project will output an inspirational quote depending on whether or not the user is feeling stressed.
