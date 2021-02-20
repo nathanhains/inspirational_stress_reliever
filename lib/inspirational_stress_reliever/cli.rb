@@ -14,4 +14,11 @@ class InspirationalStressReliever::CLI
         puts "> Are you feeling stressed today?"
     end
 
+    def options
+        print "Enter 1 for 'yes', 2 for 'no': "
+        input = gets.strip
+        puts ""
+        options_until(input)
+    end
+
 end
