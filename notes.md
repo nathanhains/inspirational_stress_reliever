@@ -17,7 +17,10 @@ Use good OO design patterns. You should be creating a collection of objects, not
     > Inspirational Quotes
     > (http://api.forismatic.com/api/1.0/)
 - Classes/relationships
-
+    -class CLI
+    -class Quotes
+    -class API
+- Structure:
  - user is greeted & asked if they are feeling stressed today
  - show options 1 for yes, 2 for no
     - if yes, 
@@ -33,4 +36,51 @@ Use good OO design patterns. You should be creating a collection of objects, not
     -else
         "Well continue having a good day!"
         (exit)
+Classes:
+class CLI
+class Quotes
+class API
+
+def hello
+        puts "Hello! Are you feeling stressed today?"
+    end
+
+    def options
+        puts "Enter '1' for yes, '2' for no: "
+        input = gets.strip
+        input.to_i
+    end
+
+    def quotes
+        options
+        num = options.to_i
+        if num == 1
+            sorry
+        end
+    end
+
+    def sorry
+        puts "I'm sorry to hear that! Would you like an inspirational quote to boost those spirits?"
+        options
+        num = options.to_i
+        if num == 1
+            while another? != 2
+                Api.new.get_quote
+                another?
+            end
+        end
+    end
+
+
+    def another?
+        puts "Would you like another Quote?"
+        options
+        num = options.to_i
+        num
+    end
+
+    def goodbye
+        puts "Well then! I hope you're feeling better! Goodbye!"
+    end
+
                     
