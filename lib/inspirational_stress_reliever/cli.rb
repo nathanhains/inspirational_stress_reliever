@@ -42,7 +42,7 @@ class InspirationalStressReliever::CLI
     end
 
     def sorry
-        puts "> I understand you might be stressed but read carefully."
+        puts "> I'm sorry to hear that! Would you like an inspirational quote to boost those spirits?"
         if options == 1
             another_options = 0
             while another_options != 2
@@ -60,5 +60,10 @@ class InspirationalStressReliever::CLI
         options
     end
 
+    def goodbye
+        puts "> Well then! Looks like you do not require my services!"
+        puts "> Goodbye!"
+        puts ""
+    end
 
 end
