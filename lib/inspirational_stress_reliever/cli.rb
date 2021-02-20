@@ -41,5 +41,24 @@ class InspirationalStressReliever::CLI
         end
     end
 
+    def sorry
+        puts "> I understand you might be stressed but read carefully."
+        if options == 1
+            another_options = 0
+            while another_options != 2
+                InspirationalStressReliever::API.new.print_quote
+                puts ""
+                if another? == 2
+                    another_options = 2
+                end
+            end
+        end
+    end
+
+    def another?  
+        puts "> Would you like another quote?"
+        options
+    end
+
 
 end
