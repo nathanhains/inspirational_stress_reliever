@@ -1,4 +1,5 @@
 class InspirationalStressReliever::CLI
+    @@i = 0
     def call
         hello
         start
@@ -32,7 +33,18 @@ class InspirationalStressReliever::CLI
     end
 
     def wrong_input
-        puts "I know you are stressed but please read carefully..."
+        @@i += 1
+        if @@i < 3
+            puts "> I understand you might be stressed but please, read carefully.."
+        elsif @@i >=3 && @@i <=5
+            puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
+        elsif @@i > 5 && @@i <=7
+            puts "> You know, programs can get stressed too.."
+        else
+            puts "> I need a break." 
+            puts "> Goodbye!"
+            exit
+        end
     end
 
     def start
@@ -46,7 +58,7 @@ class InspirationalStressReliever::CLI
         if options == 1
             another_options = 0
             while another_options != 2
-                InspirationalStressReliever::API.new.print_quote
+                InspirationalStressReliever::API.new
                 puts ""
                 if another? == 2
                     another_options = 2
@@ -55,7 +67,7 @@ class InspirationalStressReliever::CLI
         end
     end
 
-    def another?  
+    def another?(author, quote)
         puts "> Would you like another quote?"
         options
     end
