@@ -1,13 +1,13 @@
 class InspirationalStressReliever::CLI
     @@stress = 0
 
-    def call
+    def call #will begin, start and end the process when called
         hello
         start
         goodbye
     end
 
-    def hello
+    def hello #greets the user
         puts ""
         puts "-----------------------------------------"
         puts "Welcome to Inspirational Stress Reliever!"
@@ -16,14 +16,20 @@ class InspirationalStressReliever::CLI
         puts "> Are you feeling stressed today?"
     end
 
-    def options
+    def start #will start or end the program depending on user input
+        if options == 1
+            sorry
+        end
+    end
+
+    def options #takes user input
         print "Enter 1 for 'yes', 2 for 'no': "
         input = gets.strip
         puts ""
         options_until(input)
     end
 
-    def options_until(input)
+    def options_until(input) #failsafe method
         until input == '1' || input == '2'
             wrong_input
             print "Enter 1 for 'yes', 2 for 'no: "
@@ -33,7 +39,7 @@ class InspirationalStressReliever::CLI
         input.to_i
     end
 
-    def wrong_input
+    def wrong_input #outputs different message based on how many times the user inputs an unprompted character
         @@stress += 1
         if @@stress < 3
             puts "> I understand you might be stressed but please, read carefully.."
@@ -48,13 +54,7 @@ class InspirationalStressReliever::CLI
         end
     end
 
-    def start
-        if options == 1
-            sorry
-        end
-    end
-
-    def sorry
+    def sorry #will output condolence & make a call to the api class for the quote depending on user input
         puts "> I'm sorry to hear that! Would you like an inspirational quote to boost those spirits?"
         if options == 1
             another_options = 0
@@ -64,31 +64,63 @@ class InspirationalStressReliever::CLI
                     another_options = 2
                 end
             end
-        end
-    end
-
-    def call_api
-        obj = InspirationalStressReliever::API.new
-        obj.print_quote
-        puts ""
-        puts "Would you like to know the author of this quote?"
-        if options == 1
-            if obj.get_author.length > 0
-                obj.print_author
-            else
-                puts "Unknown :("
+            history
+            if author? == 1
+                puts "> Alright! Which quote can I grab that for?"
+                author
             end
         end
+    end
+
+    def call_api #creates new instance, outputs quote
+        InspirationalStressReliever::INSPIRATION_API.new.find_data
+        InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote
         puts ""
     end
 
-    def another?
+    def another? #method for asking user for another quote
         puts "> Would you like another quote?"
         options
     end
 
-    def goodbye
-        puts "> Well then! Looks like you do not require my services!"
+    def history
+        if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
+            puts "Here is a list of all your quotes: "
+            puts ""
+            InspirationalStressReliever::INSPIRATION_QUOTE.all.each_with_index do |quote, index|
+                print "#{index + 1}. "
+                puts "#{quote.print_quote}"
+            end
+        end
+    end
+
+    def author?
+        puts "> Would you like to know any of the authors?"
+        options
+    end
+
+    def author
+        z = 0
+        until z == 2
+            print "Enter the number of which quote you would like the author of, or enter 'list' to see the list again: "
+            input = gets.strip
+            puts ""
+            if input.capitalize == 'List'
+                history
+            elsif input.to_i > 0 && input.to_i <= InspirationalStressReliever::INSPIRATION_QUOTE.all.length
+                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author
+                puts "> Are you finished?"
+                if options == 1
+                    z = 2
+                end
+            else
+                wrong_input
+            end
+        end
+    end
+
+    def goodbye #ends the program with a goodbye message for all exits
+        puts "> Well then! I hope you enjoy the rest of your day!"
         puts "> Goodbye!"
         puts ""
     end
