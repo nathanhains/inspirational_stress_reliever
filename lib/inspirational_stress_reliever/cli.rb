@@ -65,9 +65,12 @@ class InspirationalStressReliever::CLI
                 end
             end
             history
-            if author? == 1
+            if author? == 1 && InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
                 puts "> Alright! Which quote can I grab that for?"
                 author
+            else
+                InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author
+                puts ""
             end
         end
     end
@@ -95,7 +98,11 @@ class InspirationalStressReliever::CLI
     end
 
     def author?
-        puts "> Would you like to know any of the authors?"
+        if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
+            puts "> Would you like to know any of the authors?"
+        else
+            puts "> Would you like to know the author of your quote?"
+        end
         options
     end
 
