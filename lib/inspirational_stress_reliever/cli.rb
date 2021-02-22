@@ -70,11 +70,14 @@ class InspirationalStressReliever::CLI
     def call_api
         obj = InspirationalStressReliever::API.new
         obj.print_quote
-        print "-"
-        if obj.get_author.length > 0
-            obj.print_author
-        else
-            puts "Unknown"
+        puts ""
+        puts "Would you like to know the author of this quote?"
+        if options == 1
+            if obj.get_author.length > 0
+                obj.print_author
+            else
+                puts "Unknown :("
+            end
         end
         puts ""
     end
