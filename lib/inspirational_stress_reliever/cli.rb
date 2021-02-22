@@ -38,9 +38,9 @@ class InspirationalStressReliever::CLI
         if @@stress < 3
             puts "> I understand you might be stressed but please, read carefully.."
         elsif @@stress >=3 && @@stress <5
-            puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
-        elsif @@stress >= 5 && @@stress <7
             puts "> You know, programs can get stressed too.."
+        elsif @@stress >= 5 && @@stress <7
+            puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
         else
             puts "> I need a break." 
             puts "> Goodbye!"
