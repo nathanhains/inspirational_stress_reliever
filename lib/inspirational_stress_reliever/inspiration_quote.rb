@@ -19,6 +19,7 @@ class InspirationalStressReliever::INSPIRATION_QUOTE
     end
 
     def print_author
+        
         puts self.quoteAuthor
     end
 

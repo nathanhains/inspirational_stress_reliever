@@ -65,12 +65,16 @@ class InspirationalStressReliever::CLI
                 end
             end
             history
-            if author? == 1 && InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
-                puts "> Alright! Which quote can I grab that for?"
-                author
+            if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
+                if author? == 1
+                    puts "> Alright! Which quote can I grab that for?"
+                    author
+                end
             else
-                InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author
-                puts ""
+                if author? == 1
+                    InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author
+                    puts ""
+                end
             end
         end
     end

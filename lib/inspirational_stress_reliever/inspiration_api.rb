@@ -13,17 +13,4 @@ class InspirationalStressReliever::INSPIRATION_API
         InspirationalStressReliever::INSPIRATION_QUOTE.new(response_hash)
     end
 
-
-    #def print_quote #prints quote from hash
-        #puts self.find_data["quoteText"]
-    #end
-
-    #def get_author #returns author from hash
-        #self.find_data["quoteAuthor"]
-    #end
-
-    #def print_author #prints author from hash
-        #puts self.find_data["quoteAuthor"]
-    #end
-
 end
