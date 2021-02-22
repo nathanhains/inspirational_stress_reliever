@@ -7,9 +7,6 @@ class InspirationalStressReliever::API
 
     def find_data
         response_hash = HTTParty.get(@url)
-        #response_hash
-        #self.get_quote(response_hash)
-        #binding.pry
     end
 
     def print_quote
