@@ -92,9 +92,10 @@ class InspirationalStressReliever::CLI
 
     def history
         if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
-            puts "Here is a list of all your quotes: "
+            puts "> Here is a list of all your quotes: "
             puts ""
             InspirationalStressReliever::INSPIRATION_QUOTE.all.each_with_index do |quote, index|
+                sleep 0.5
                 print "#{index + 1}. "
                 puts "#{quote.print_quote}"
             end
@@ -131,7 +132,7 @@ class InspirationalStressReliever::CLI
     end
 
     def goodbye #ends the program with a goodbye message for all exits
-        puts "> Well then! I hope you enjoy the rest of your day!"
+        puts "> Well then! Looks like my job here is done!"
         puts "> Goodbye!"
         puts ""
     end
