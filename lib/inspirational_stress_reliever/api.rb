@@ -7,16 +7,21 @@ class InspirationalStressReliever::API
 
     def find_data
         response_hash = HTTParty.get(@url)
-        self.get_quote(response_hash)
-    end
-
-    def get_quote(find_data)
-        find_data["quoteText"]
+        #response_hash
+        #self.get_quote(response_hash)
+        #binding.pry
     end
 
     def print_quote
-        puts find_data
+        puts self.find_data["quoteText"]
     end
 
+    def get_author
+        self.find_data["quoteAuthor"]
+    end
+
+    def print_author
+        puts self.find_data["quoteAuthor"]
+    end
 
 end

@@ -1,5 +1,6 @@
 class InspirationalStressReliever::CLI
-    @@i = 0
+    @@stress = 0
+
     def call
         hello
         start
@@ -33,12 +34,12 @@ class InspirationalStressReliever::CLI
     end
 
     def wrong_input
-        @@i += 1
-        if @@i < 3
+        @@stress += 1
+        if @@stress < 3
             puts "> I understand you might be stressed but please, read carefully.."
-        elsif @@i >=3 && @@i <=5
+        elsif @@stress >=3 && @@stress <5
             puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
-        elsif @@i > 5 && @@i <=7
+        elsif @@stress >= 5 && @@stress <7
             puts "> You know, programs can get stressed too.."
         else
             puts "> I need a break." 
@@ -58,8 +59,7 @@ class InspirationalStressReliever::CLI
         if options == 1
             another_options = 0
             while another_options != 2
-                InspirationalStressReliever::API.new
-                puts ""
+                call_api
                 if another? == 2
                     another_options = 2
                 end
@@ -67,7 +67,19 @@ class InspirationalStressReliever::CLI
         end
     end
 
-    def another?(author, quote)
+    def call_api
+        obj = InspirationalStressReliever::API.new
+        obj.print_quote
+        print "-"
+        if obj.get_author.length > 0
+            obj.print_author
+        else
+            puts "Unknown"
+        end
+        puts ""
+    end
+
+    def another?
         puts "> Would you like another quote?"
         options
     end
