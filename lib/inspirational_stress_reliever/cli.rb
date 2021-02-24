@@ -9,10 +9,10 @@ class InspirationalStressReliever::CLI
 
     def hello #greets the user
         puts ""
-        puts "-----------------------------------------"
-        puts "Welcome to Inspirational Stress Reliever!"
-        puts "-----------------------------------------"
-        puts ""
+        puts "-----------------------------------------".green
+        puts "Welcome to Inspirational Stress Reliever!".green
+        puts "-----------------------------------------".green
+        puts ""                                                                              
     end
 
     def start #will start or end the program depending on user input
@@ -29,7 +29,7 @@ class InspirationalStressReliever::CLI
         elsif @@stress >=3 && @@stress <5
             puts "> You know, programs can get stressed too.."
         elsif @@stress >= 5 && @@stress <7
-            puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
+            puts "> Listen buddy, either read the prompts or start handing out some quotes of your own.".red
         else
             puts "> Would you look at that! Looks like break time!" 
             puts "> Goodbye!"
@@ -59,7 +59,7 @@ class InspirationalStressReliever::CLI
             else
                 if author? == true
                     puts ""
-                    puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author.red
+                    puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author.blue
                 end
             end
         end
@@ -68,7 +68,7 @@ class InspirationalStressReliever::CLI
     def call_api #creates new instance, outputs quote
         puts ""
         InspirationalStressReliever::INSPIRATION_API.new.find_data
-        puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.red
+        puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.blue
         puts ""
     end
 
@@ -85,7 +85,7 @@ class InspirationalStressReliever::CLI
             InspirationalStressReliever::INSPIRATION_QUOTE.all.each_with_index do |quote, index|
                 sleep 0.5
                 print "#{index + 1}. "
-                puts "#{quote.print_quote.red}"
+                puts "#{quote.print_quote.blue}"
             end
         end
     end
@@ -115,7 +115,7 @@ class InspirationalStressReliever::CLI
                 goodbye
                 exit
             elsif input.to_i > 0 && input.to_i <= InspirationalStressReliever::INSPIRATION_QUOTE.all.length
-                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.red
+                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.blue
                 puts ""
                 prompt = TTY::Prompt.new
                 if prompt.yes?("> Are you finished?") == true
