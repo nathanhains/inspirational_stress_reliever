@@ -13,30 +13,13 @@ class InspirationalStressReliever::CLI
         puts "Welcome to Inspirational Stress Reliever!"
         puts "-----------------------------------------"
         puts ""
-        puts "> Are you feeling stressed today?"
     end
 
     def start #will start or end the program depending on user input
-        if options == 1
+        prompt = TTY::Prompt.new
+        if prompt.yes?("> Are you feeling stressed today?") == true
             sorry
         end
-    end
-
-    def options #takes user input
-        print "Enter 1 for 'yes', 2 for 'no': "
-        input = gets.strip
-        puts ""
-        options_until(input)
-    end
-
-    def options_until(input) #failsafe method
-        until input == '1' || input == '2'
-            wrong_input
-            print "Enter 1 for 'yes', 2 for 'no: "
-            input = gets.strip
-            puts ""
-        end
-        input.to_i
     end
 
     def wrong_input #outputs different message based on how many times the user inputs an unprompted character
@@ -48,81 +31,91 @@ class InspirationalStressReliever::CLI
         elsif @@stress >= 5 && @@stress <7
             puts "> Listen buddy, either read the prompts or start handing out some quotes of your own."
         else
-            puts "> I need a break." 
+            puts "> Would you look at that! Looks like break time!" 
             puts "> Goodbye!"
+            puts ""
             exit
         end
     end
 
     def sorry #will output condolence & make a call to the api class for the quote depending on user input
-        puts "> I'm sorry to hear that! Would you like an inspirational quote to boost those spirits?"
-        if options == 1
+        puts ""
+        prompt = TTY::Prompt.new
+        if prompt.yes?("> I'm sorry to hear that! Would you like an inspirational quote to boost those spirits?") == true
             another_options = 0
             while another_options != 2
                 call_api
-                if another? == 2
+                if another? == false
                     another_options = 2
                 end
             end
             history
             if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
-                if author? == 1
+                if author? == true
+                    puts ""
                     puts "> Alright! Which quote can I grab that for?"
                     author
                 end
             else
-                if author? == 1
-                    InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author
+                if author? == true
                     puts ""
+                    puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author.red
                 end
             end
         end
     end
 
     def call_api #creates new instance, outputs quote
+        puts ""
         InspirationalStressReliever::INSPIRATION_API.new.find_data
-        InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote
+        puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.red
         puts ""
     end
 
     def another? #method for asking user for another quote
-        puts "> Would you like another quote?"
-        options
+        prompt = TTY::Prompt.new
+        prompt.yes?("> Would you like another quote?")
     end
 
     def history
         if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
+            puts ""
             puts "> Here is a list of all your quotes: "
             puts ""
             InspirationalStressReliever::INSPIRATION_QUOTE.all.each_with_index do |quote, index|
                 sleep 0.5
                 print "#{index + 1}. "
-                puts "#{quote.print_quote}"
+                puts "#{quote.print_quote.red}"
             end
         end
     end
 
     def author?
         if InspirationalStressReliever::INSPIRATION_QUOTE.all.length > 1
-            puts "> Would you like to know any of the authors?"
+            prompt_1 = TTY::Prompt.new
+            puts ""
+            prompt_1.yes?("> Would you like to know any of the authors?")
         else
-            puts "> Would you like to know the author of your quote?"
+            prompt_2 = TTY::Prompt.new
+            puts ""
+            prompt_2.yes?("> Would you like to know the author of your quote before you go?")
         end
-        options
     end
 
     def author
         z = 0
         until z == 2
-            print "Enter the number of which quote you would like the author of, or enter 'list' to see the list again: "
+            puts ""
+            print "Enter the number for which you would like the author of, or enter 'list' to see the list again: "
             input = gets.strip
             puts ""
             if input.capitalize == 'List'
                 history
             elsif input.to_i > 0 && input.to_i <= InspirationalStressReliever::INSPIRATION_QUOTE.all.length
-                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author
-                puts "> Are you finished?"
-                if options == 1
+                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.red
+                puts ""
+                prompt = TTY::Prompt.new
+                if prompt.yes?("> Are you finished?") == true
                     z = 2
                 end
             else
@@ -132,6 +125,7 @@ class InspirationalStressReliever::CLI
     end
 
     def goodbye #ends the program with a goodbye message for all exits
+        puts ""
         puts "> Well then! Looks like my job here is done!"
         puts "> Goodbye!"
         puts ""

@@ -1,5 +1,7 @@
 require 'pry'
 require 'httparty'
+require 'tty-prompt'
+require 'colorize'
 
 require_relative "inspirational_stress_reliever/version"
 require_relative "inspirational_stress_reliever/cli"

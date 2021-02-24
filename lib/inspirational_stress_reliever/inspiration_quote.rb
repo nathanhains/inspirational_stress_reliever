@@ -15,12 +15,15 @@ class InspirationalStressReliever::INSPIRATION_QUOTE
     end
 
     def print_quote
-        puts self.quoteText
+        self.quoteText
     end
 
     def print_author
-        
-        puts self.quoteAuthor
+        if self.quoteAuthor != ""
+            self.quoteAuthor
+        else
+            "Anonymous"
+        end
     end
 
 end
