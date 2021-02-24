@@ -111,6 +111,9 @@ class InspirationalStressReliever::CLI
             puts ""
             if input.capitalize == 'List'
                 history
+            elsif input.capitalize == 'Exit'
+                goodbye
+                exit
             elsif input.to_i > 0 && input.to_i <= InspirationalStressReliever::INSPIRATION_QUOTE.all.length
                 puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.red
                 puts ""
