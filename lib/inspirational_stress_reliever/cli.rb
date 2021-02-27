@@ -71,9 +71,7 @@ class InspirationalStressReliever::CLI
         puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.cyan
         puts ""
     end
-
-
-
+    
     def another? #method for asking user for another quote
         prompt = TTY::Prompt.new
         prompt.yes?("> Would you like another quote?")
