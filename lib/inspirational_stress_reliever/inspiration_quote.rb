@@ -7,6 +7,7 @@ class InspirationalStressReliever::INSPIRATION_QUOTE
             self.class.attr_accessor(key)
             self.send("#{key}=", value)
         end
+       
         @@all << self
     end
 

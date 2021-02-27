@@ -59,18 +59,20 @@ class InspirationalStressReliever::CLI
             else
                 if author? == true
                     puts ""
-                    puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author.blue
+                    puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_author.cyan
                 end
             end
         end
     end
 
-    def call_api #creates new instance, outputs quote
+    def call_api = #creates new instance, outputs quote
         puts ""
         InspirationalStressReliever::INSPIRATION_API.new.find_data
-        puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.blue
+        puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.cyan
         puts ""
     end
+
+
 
     def another? #method for asking user for another quote
         prompt = TTY::Prompt.new
@@ -85,7 +87,7 @@ class InspirationalStressReliever::CLI
             InspirationalStressReliever::INSPIRATION_QUOTE.all.each_with_index do |quote, index|
                 sleep 0.5
                 print "#{index + 1}. "
-                puts "#{quote.print_quote.blue}"
+                puts "#{quote.print_quote.cyan}"
             end
         end
     end
@@ -115,7 +117,7 @@ class InspirationalStressReliever::CLI
                 goodbye
                 exit
             elsif input.to_i > 0 && input.to_i <= InspirationalStressReliever::INSPIRATION_QUOTE.all.length
-                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.blue
+                puts InspirationalStressReliever::INSPIRATION_QUOTE.all[input.to_i - 1].print_author.cyan
                 puts ""
                 prompt = TTY::Prompt.new
                 if prompt.yes?("> Are you finished?") == true
