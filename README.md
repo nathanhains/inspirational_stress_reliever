@@ -29,7 +29,7 @@ To install this gem on your local machine, run 'bundle exec rake install.' To re
 
 ## Contributing
 
-Bug reports and pull reports are welcome on GitHub at https://github.com/"Gingertonic'/eden_events. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://Contributor-covenant.org) code of conduct.
+Bug reports and pull reports are welcome on GitHub at https://github.com/"nathanhains'/inspirational_stress_reliever. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://Contributor-covenant.org) code of conduct.
 
 ## License
 

@@ -65,7 +65,7 @@ class InspirationalStressReliever::CLI
         end
     end
 
-    def call_api = #creates new instance, outputs quote
+    def call_api #creates new instance, outputs quote
         puts ""
         InspirationalStressReliever::INSPIRATION_API.new.find_data
         puts InspirationalStressReliever::INSPIRATION_QUOTE.all.last.print_quote.cyan
